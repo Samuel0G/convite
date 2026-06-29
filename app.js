@@ -8,7 +8,7 @@ const baseItems = [
   { emoji:'🤗', name:'Abraços', description:'Quantidade ilimitada', quantity:false },
   { emoji:'💋', name:'Beijinhos', description:'O melhor item do cardápio', quantity:false }
 ];
-const themes={game:'🇧🇷 Noite de jogo',movie:'🎬 Cinema em casa',dinner:'🍝 Jantar a dois',picnic:'🧺 Piquenique',surprise:'✨ Surpresa romântica'};
+const themes={game:'🇧🇷 Dia de jogo',movie:'🎬 Cinema em casa',dinner:'🍝 Jantar a dois',picnic:'🧺 Piquenique',surprise:'✨ Surpresa romântica'};
 const state={offered:new Set(['Batata frita','Refrigerante','Chocolate','Filme depois do jogo','Cobertor','Abraços','Beijinhos']),draft:{},current:null,order:{}};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const safe=text=>{const el=document.createElement('div');el.textContent=text;return el.innerHTML};
