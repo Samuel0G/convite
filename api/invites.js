@@ -1,5 +1,20 @@
-const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
-const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+const environmentKeys = Object.keys(process.env);
+const redisUrlKey = environmentKeys.find(key =>
+  /(?:UPSTASH|STORAGE|KV)/i.test(key) && /(?:REST_)?URL$/i.test(key)
+);
+const redisTokenKey = environmentKeys.find(key =>
+  /(?:UPSTASH|STORAGE|KV)/i.test(key) && /TOKEN$/i.test(key) && !/READ.?ONLY/i.test(key)
+);
+const redisUrl = process.env.UPSTASH_REDIS_REST_URL
+  || process.env.KV_REST_API_URL
+  || process.env.STORAGE_REDIS_REST_URL
+  || process.env.STORAGE_URL
+  || process.env[redisUrlKey];
+const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN
+  || process.env.KV_REST_API_TOKEN
+  || process.env.STORAGE_REDIS_REST_TOKEN
+  || process.env.STORAGE_TOKEN
+  || process.env[redisTokenKey];
 
 async function redis(command) {
   if (!redisUrl || !redisToken) throw new Error('Banco de dados não configurado');
